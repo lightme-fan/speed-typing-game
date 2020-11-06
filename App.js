@@ -1,12 +1,18 @@
-/**
- * Challenge: build the basic structure of our game
- *
- * 1. <h1> title at the top
- * 2. <textarea> for the box to type in
- *      (tip: React normalizes <textarea /> to be more like <input />,
- *      so it can be used as a self-closing element and uses the `value` property
- *      to set its contents)
- * 3. <h4> ti display the amount of time remaining
- * 4. <button> to start the game
- * 5. Another <h1> to display the word count
- */
+import React, { useEffect, useRef, useState } from 'react'
+import useHook from './useHook'
+
+function App() {
+    const [text, time, start, count, handleStartGame, handleChange, usingRef] = useHook()
+    
+    return (
+        <>
+            <h1>Type Speeding</h1>
+            <textarea ref={usingRef} onChange={handleChange} value={text} disabled={!start} rows='4'/>
+            <h4>Time remaining {time}</h4>
+            <button onClick={handleStartGame} disabled={start}>Start</button>
+            <h1>Word Count: {count}</h1>
+        </>
+    )
+}
+
+export default App
